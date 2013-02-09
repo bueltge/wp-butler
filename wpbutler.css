@@ -1,4 +1,5 @@
 #wp-butler-dialog {
+<<<<<<< HEAD
   display: none;
   min-height: inherit !important; }
 
@@ -29,3 +30,13 @@
     margin: 0.5em 0;
     padding: 0.5em;
     font-size: 2em; }
+=======
+	display: none;
+	min-height: inherit !important;
+}
+
+/* Admin Bar item */
+#wp-admin-bar-wp-butler:hover {
+	cursor: pointer;
+}
+>>>>>>> de2a59287519e240f8b48dab8220d1d37468fceb
