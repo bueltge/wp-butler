@@ -5,14 +5,9 @@ jQuery( function($) {
 	$.keyStroke( 66, function() {
 		$( "#wp-butler-dialog" ).dialog({
 			modal: true,
-<<<<<<< HEAD
 			closeOnEscape: true,
 			width: 420
 		}).parent().addClass('butler-ui-widget');
-=======
-			closeOnEscape: true
-		});
->>>>>>> de2a59287519e240f8b48dab8220d1d37468fceb
 	
 		$( "#wp-butler-field" ).focus();
 	}, { modKeys: [ 'shiftKey', 'altKey' ] } );
@@ -21,14 +16,9 @@ jQuery( function($) {
 	$( '#wp-admin-bar-wp-butler' ).click( function() {
 		$( "#wp-butler-dialog" ).dialog( {
 			modal: true,
-<<<<<<< HEAD
 			closeOnEscape: true,
 			width: 420
 		}).parent().addClass('butler-ui-widget');
-=======
-			closeOnEscape: true
-		});
->>>>>>> de2a59287519e240f8b48dab8220d1d37468fceb
 		
 		$( "#wp-butler-field" ).focus();
 	} );

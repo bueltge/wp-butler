@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 /*
 Plugin Name: WP Butler
 Plugin URI:  http://wpbutler.com
@@ -25,33 +24,6 @@ License:     GPL2
  along with this program; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-=======
-/**
- * Plugin Name: WP Butler
- * Plugin URI:  http://wpbutler.com
- * Description: WP Butler brings you what you need in the Wordpress Admin. An autocomplete menu to let you jump to all the common tasks you may need to perform, just hit <code>shift+alt+b</code>!
- * Version:     1.8
- * Author:      Japh
- * Author URI:  http://japh.com.au
- * License:     GPL2
- *
- * 
- *  Copyright 2013  Japh  (email : wordpress@japh.com.au)
- * 
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License, version 2, as 
- *  published by the Free Software Foundation.
- * 
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- * 
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- */
->>>>>>> de2a59287519e240f8b48dab8220d1d37468fceb
 
 /**
  * WP Butler
@@ -108,7 +80,6 @@ if ( ! class_exists( 'Japh_Butler' ) ) {
 			if ( ! is_admin() )
 				return NULL;
 
-<<<<<<< HEAD
 			load_plugin_textdomain( 'wp-butler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 			$this->post_types = get_post_types( array( 'show_in_nav_menus' => true ), 'objects', 'and' );
@@ -120,76 +91,6 @@ if ( ! class_exists( 'Japh_Butler' ) ) {
 			add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ), 9999 );
 
 		}
-=======
-		if ( ! is_admin() )
-			return NULL;
-		
-		load_plugin_textdomain( 'wp-butler', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-		
-		$this->post_types = get_post_types( array( 'show_in_nav_menus' => true ), 'objects', 'and' );
-		$this->taxonomies = get_taxonomies( array( 'show_in_nav_menus' => true ), 'objects', 'and' );
-		
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-		add_action( 'admin_footer', array( $this, 'footer' ) );
-		add_action( 'wp_ajax_wp_butler_actions', array( $this, 'actions' ) );
-		add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ), 9999 );
-	}
-
-	function footer() {
-		echo '<div id="wp-butler-dialog" title="' . __( "What would you like to do?", "wp-butler" ) . '">';
-		echo '	<p>';
-		echo '		<form id="wp-butler-form"><input type="text" placeholder="' . __( "Just start typing", "wp-butler" ) . '..." id="wp-butler-field"><input type="hidden" id="wp-butler-nonce" name="wp-butler-nonce" value="' . wp_create_nonce( 'wp_butler_nonce' ) . '" /><input type="hidden" id="wp-butler-context" name="wp-butler-context" value="' . ( is_network_admin() ? 'network' : 'site' ) . '" /></form>';
-		echo '	</p>';
-		echo '</div>';
-	}
-
-	function enqueue() {
-		// Enqueue styles
-		if ( 'classic' == get_user_option( 'admin_color') ) {
-			wp_register_style(
-				'butler-jquery-ui-css',
-				plugin_dir_url( __FILE__ ) . 'jquery-ui-css/jquery-ui-classic.css',
-				array(),
-				FALSE,
-				'screen'
-			);
-		}
-		else {
-			wp_register_style(
-				'butler-jquery-ui-css',
-				plugin_dir_url( __FILE__ ) . 'jquery-ui-css/jquery-ui-fresh.css',
-				array(),
-				FALSE,
-				'screen'
-			);
-		}
-		wp_register_style(
-			'wpbutler',
-			plugins_url( 'wpbutler.css', __FILE__ ),
-			array( 'butler-jquery-ui-css' ),
-			FALSE,
-			'screen'
-		);
-		wp_enqueue_style( 'wpbutler' );
-		
-		// Enqueue scripts
-		wp_register_script(
-			'keystroke',
-			plugins_url( 'keystroke/jquery.keystroke.min.js', __FILE__ ),#
-			array( 'jquery' ),
-			'0d77ac267da80cbe0e0ca8e6fe8b5b2bb8ee1bac',
-			TRUE
-		);
-		wp_register_script(
-			'wpbutler',
-			plugins_url( 'wpbutler.js', __FILE__ ),
-			array( 'jquery-ui-autocomplete', 'jquery-ui-dialog', 'keystroke' ),
-			$this->version,
-			TRUE
-		);
-		wp_enqueue_script( 'wpbutler' );
-	}
->>>>>>> de2a59287519e240f8b48dab8220d1d37468fceb
 
 		/**
 		 * Footer HTML output
@@ -572,12 +473,8 @@ if ( ! class_exists( 'Japh_Butler' ) ) {
 				}
 			}
 
-<<<<<<< HEAD
 			return array( $term, $actions );
 		}
-=======
-					list( $term, $butler_actions ) = apply_filters( 'wp_butler_ajax_keyword_actions', array( $term, $butler_actions ) );
->>>>>>> de2a59287519e240f8b48dab8220d1d37468fceb
 
 		/**
 		 * Actions
@@ -670,34 +567,7 @@ if ( ! class_exists( 'Japh_Butler' ) ) {
 		}
 
 	}
-	
-	/**
-	 * Enhance the admin bar
-	 *
-	 * @param  $wp_admin_bar  Array
-	 * @return void
-	 * @author fb
-	 * @since  01/21/2012
-	 */
-	public function enhance_admin_bar( $wp_admin_bar ) {
-		
-		if ( ! is_super_admin() || ! is_admin_bar_showing() )
-			return NULL;
-		
-		$classes = apply_filters( 'wp_butler_admin_bar_classes', array() );
-		$classes = implode( ' ', $classes );
-		
-		$wp_admin_bar->add_menu(
-			array(
-				'id'        => 'wp-butler',
-				'parent'    => 'top-secondary',
-				'secondary' => FALSE,
-				'title'     => apply_filters( 'wp_butler_admin_bar_title', __( 'WP Butler', 'wp-butler' ) ),
-				'meta'      => array( 'class' => $classes )
-			)
-		);
-	}
-	
+
 }
 
 /**
